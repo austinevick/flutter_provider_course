@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_provider/providers/products.dart';
+import 'package:flutter_provider/screens/edit_product_screen.dart';
 import 'package:flutter_provider/widgets/app_drawer.dart';
 import 'package:flutter_provider/widgets/user_products_item.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,14 @@ class UserProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Your Products'),
         actions: [
-          IconButton(icon: Icon(Icons.add), onPressed: () {}),
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (ctx) => EditProductsScreen(),
+              ),
+            ),
+          ),
         ],
       ),
       body: Padding(
@@ -23,6 +31,7 @@ class UserProductsScreen extends StatelessWidget {
             itemCount: product.items.length,
             itemBuilder: (context, i) {
               return UserProductsItem(
+                id: product.items[i].id,
                 title: product.items[i].title,
                 imageUrl: product.items[i].imageUrl,
               );
